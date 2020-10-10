@@ -62,12 +62,19 @@ def generic_mysql_sselect(table, selectparams, conditions):
 
 
 def quick_mongo_migrate():
+    # do something here
     return
 
 
+# better for simple search schema, but supports advanced search as well.
 def generic_mongodb_select(params):
-
-    return
+    # do something here
+    ret = []
+    eec = mgdb[mongo_dbname]
+    for p in eec.find(params):
+        print(p)
+        ret.append(p)
+    return ret
 
 
 
@@ -75,7 +82,8 @@ if __name__ == "__main__":
     print("tensorflow engine starting...")
     generic_mysql_sselect("employees", ("name", "dateHired", "empGroup"), "empGroup = \"Executives\"")
     dbc.close()
-    vc = mgdb[mongo_dbname]
-    for p in vc.find():
-        print(p)
+    # vc = mgdb[mongo_dbname]
+    # for p in vc.find():
+        # print(p)
+    generic_mongodb_select({"id": 5949885})
     client.close()
